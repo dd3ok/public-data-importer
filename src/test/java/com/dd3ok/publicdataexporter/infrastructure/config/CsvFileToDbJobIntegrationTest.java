@@ -43,7 +43,7 @@ class CsvFileToDbJobIntegrationTest {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    @Qualifier("csvToDbJob")
+    @Qualifier("restaurantCsvToDbJob")
     private Job csvToDbJob;
 
     @TestConfiguration

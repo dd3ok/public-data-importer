@@ -18,7 +18,7 @@ public class PublicDataExporterApplication {
         ApplicationContext context = SpringApplication.run(PublicDataExporterApplication.class, args);
 
         JobLauncher jobLauncher = context.getBean(JobLauncher.class);
-        Job job = context.getBean("csvToDbJob", Job.class);
+        Job job = context.getBean("restaurantCsvToDbJob", Job.class);
 
         JobParameters jobParameters = new JobParametersBuilder()
                 .addLocalDateTime("launchTime", LocalDateTime.now())
