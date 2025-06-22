@@ -1,0 +1,28 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true # 이 설정 추가
+  # 테스트 시에는 H2 인메모리 데이터베이스 사용
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=MYSQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  # Spring Batch 메타데이터 테이블 자동 생성 비활성화 (아래 sql.init으로 직접 제어)
+  batch:
+    jdbc:
+      initialize-schema: never
+
+  # 테스트 시작 시 실행할 SQL 스크립트 설정
+  sql:
+    init:
+      mode: always # 항상 스크립트 실행
+      platform: h2
+      schema-locations:
+        - classpath:org/springframework/batch/core/schema-h2.sql # 1. Spring Batch 메타데이터 테이블 생성
+        - classpath:schema.sql                                  # 2. 비즈니스 테이블(restaurant) 생성
+
+# 로깅 레벨 설정 (배치 실행 로그 확인용)
+logging:
+  level:
+    org.springframework.batch: INFO
